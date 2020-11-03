@@ -8,7 +8,7 @@ public class DamagingTile : MonoBehaviour
     public float score = 10;
 
     void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.name == "Player") {
+        if (collider.gameObject.name == "Player" || collider.gameObject.name == "Hologram(Clone)") {
             GameEvents.InvokeBossDamage(score);
             _runtimeData.tileActive = false;
             Destroy(gameObject);

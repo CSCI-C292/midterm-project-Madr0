@@ -11,7 +11,7 @@ public class CollectibleSpawner : MonoBehaviour
     public GameObject heartPrefab;
     public float spawnRate;
 
-    private float timeSinceLastTile = 3;
+    private float timeSinceLastTile = 5;
 
     void Awake() {
         GameEvents.StageChanged += SpawnHeart;
@@ -33,7 +33,7 @@ public class CollectibleSpawner : MonoBehaviour
         if(_runtimeData.playerPos.x < 0)
             randX = UnityEngine.Random.Range(4,7);
         float randY = UnityEngine.Random.Range(0,4);
-        Instantiate(tilePrefab, new Vector3(-1.4f+.4f*randX,-.15f-.3f*randY,.1f), Quaternion.identity);
+        Instantiate(tilePrefab, new Vector3(-1.4f+.4f*randX,-.15f-.3f*randY,.7f), Quaternion.identity);
     }
 
     void SpawnHeart(object sender, EventArgs args) {

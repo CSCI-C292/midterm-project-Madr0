@@ -5,9 +5,8 @@ using UnityEngine;
 public class SawAttack : MonoBehaviour
 {
     public float rotationSpeed;
-    public float moveSpeed;
-    public int moveDirectionX;
-    public int moveDirectionY;
+    public float moveSpeedX;
+    public float moveSpeedY;
 
     void Update()
     {
@@ -16,7 +15,7 @@ public class SawAttack : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.name == "Player") {
+        if (collider.gameObject.name == "Player" || collider.gameObject.name == "Hologram(Clone)") {
             GameEvents.InvokePlayerDamage();
             Destroy(gameObject);
         }
@@ -32,8 +31,8 @@ public class SawAttack : MonoBehaviour
     }
 
     void Move() {
-        float moveX = gameObject.transform.position.x + (moveSpeed*Time.deltaTime*moveDirectionX);
-        float moveY = gameObject.transform.position.y + (moveSpeed*Time.deltaTime*moveDirectionY);
+        float moveX = gameObject.transform.position.x + (Time.deltaTime*moveSpeedX);
+        float moveY = gameObject.transform.position.y + (Time.deltaTime*moveSpeedY);
         gameObject.transform.position = new Vector3(moveX,moveY,0);
     }
 }

@@ -14,6 +14,7 @@ public static class GameEvents
     public static event EventHandler PlayerDamaged;
     public static event EventHandler PlayerHealed;
     public static event EventHandler StageChanged;
+    public static event EventHandler HologramSpawned;
 
     public static void InvokeBossDamage(float damage) {
         BossDamaged(null, new BossEventArgs {damagePayload = damage});
@@ -29,5 +30,9 @@ public static class GameEvents
 
     public static void InvokeStageChanged() {
         StageChanged(null, EventArgs.Empty);
+    }
+
+    public static void SpawnHologram() {
+        HologramSpawned(null, EventArgs.Empty);
     }
 }

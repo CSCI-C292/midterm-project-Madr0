@@ -639,9 +639,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _runtimeData: {fileID: 11400000, guid: d6539bcb46cb6b446ad4db17127b895d, type: 2}
-  timeBetweenAttacks: 2
   _sawPrefab: {fileID: 2240535832909721489, guid: a79b4c57fa64a3a4eb9aa51b46b93bda, type: 3}
   _sawLauncherPrefab: {fileID: 4590605588352511314, guid: d19a7c36e4299c742b32fdb591984e3e, type: 3}
+  _lightningPrefab: {fileID: 2858263913270995865, guid: 618eee9d22b6bb24192e91b30019ef5f, type: 3}
+  _lightningGunPrefab: {fileID: 8799049170619974235, guid: fbc5aa72cb0c09740bd35a3c184116c8, type: 3}
+  _spikePrefab: {fileID: 53317603626600254, guid: b9fe510ed518d1240a22b6f37cf5d973, type: 3}
+  _spikeWarningPrefab: {fileID: 7312886101835943289, guid: 5477d0c93a1b3a8409e6ada098763ea7, type: 3}
 --- !u!1 &863927126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,11 +1963,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _runtimeData: {fileID: 11400000, guid: d6539bcb46cb6b446ad4db17127b895d, type: 2}
+  _hologramPrefab: {fileID: 1916006289561573735, guid: 1e669bb8bc09fad489d6be3f8c1baae3, type: 3}
   moveSpeed: 5
   movePoint: {fileID: 1654730971}
   verticalGridLength: 0.3
   horizontalGridLength: 0.4
   playerHealthCap: 4
+  playerITime: 1
   playerHealth: 0
 --- !u!4 &2056272573
 Transform:

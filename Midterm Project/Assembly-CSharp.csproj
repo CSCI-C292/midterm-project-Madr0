@@ -40,14 +40,17 @@
      <Compile Include="Assets\Player\HeadBob.cs" />
      <Compile Include="Assets\Boss\BossHealth\BossBar.cs" />
      <Compile Include="Assets\Game Handlers\GameEvents.cs" />
+     <Compile Include="Assets\Collectibles\Heart.cs" />
+     <Compile Include="Assets\Boss\Attacks\BossAttackSpawner.cs" />
      <Compile Include="Assets\Collectibles\DamagingTile.cs" />
      <Compile Include="Assets\Game Handlers\Initializer.cs" />
      <Compile Include="Assets\Collectibles\CollectibleSpawner.cs" />
      <Compile Include="Assets\Game Handlers\RuntimeData.cs" />
-     <Compile Include="Assets\Boss\Boss.cs" />
      <Compile Include="Assets\Boss\Attacks\Saws\SawAttack.cs" />
-     <Compile Include="Assets\Boss\Attacks\BossAttackSpawner.cs" />
-     <Compile Include="Assets\Collectibles\Heart.cs" />
+     <Compile Include="Assets\Boss\Boss.cs" />
+     <Compile Include="Assets\Boss\Attacks\Electricity\LightningAttack.cs" />
+     <Compile Include="Assets\Boss\Attacks\Spikes\SpikeAttack.cs" />
+     <Compile Include="Assets\Player\Hologram.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -615,6 +618,9 @@
     <Reference Include="PsdPlugin">
         <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+        <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
         <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
@@ -632,6 +638,9 @@
     </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
         <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+        <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
         <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
@@ -662,12 +671,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-        <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-        <HintPath>C:/Users/logan/git/C292/midterm-project/Midterm Project/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

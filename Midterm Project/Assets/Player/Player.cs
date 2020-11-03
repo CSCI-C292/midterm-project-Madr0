@@ -6,18 +6,26 @@ using System;
 public class Player : MonoBehaviour
 {
     public RuntimeData _runtimeData;
+    public GameObject _hologramPrefab;
 
     public float moveSpeed = 5f;
     public Transform movePoint;
     public float verticalGridLength = .2f;
     public float horizontalGridLength = .3f;
     public int playerHealthCap = 4;
+    public float playerITime = 1f;
     
     public int playerHealth;
+
+    private float timeInvincible = 0;
+
+    private float xLow = -1.6f;
+    private float xHigh = 1.6f;
 
     void Awake() {
         GameEvents.PlayerDamaged += OnPlayerDamage;
         GameEvents.PlayerHealed += OnPlayerHealed;
+        GameEvents.HologramSpawned += OnHologramSpawned;
     }
 
     void Start()
@@ -30,7 +38,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-        
+        timeInvincible -= Time.deltaTime;
         if(Vector3.Distance(transform.position, movePoint.position) <= .05) {
             if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
                 MoveX(horizontalGridLength);
@@ -45,10 +53,12 @@ public class Player : MonoBehaviour
                 MoveY(-verticalGridLength);
             }
         }
+
+
     }
 
     void MoveX(float dist) {
-        if(Mathf.Abs(movePoint.position.x + dist) < 1.7) {
+        if(movePoint.position.x + dist < xHigh && movePoint.position.x + dist > xLow) {
             movePoint.position += new Vector3(dist,0,0);
         }
         _runtimeData.playerPos = movePoint.transform.position;
@@ -62,9 +72,14 @@ public class Player : MonoBehaviour
     }
 
     void OnPlayerDamage(object sender, EventArgs args) {
-        playerHealth--;
-        if(playerHealth <= 0) {
-            // game over
+        if (timeInvincible <= 0) {
+            timeInvincible = playerITime;
+            playerHealth--;
+            if(playerHealth <= 0) {
+                // game over
+            }
+        } else {
+            
         }
     }
 
@@ -72,5 +87,15 @@ public class Player : MonoBehaviour
         if(playerHealth < playerHealthCap) {
             playerHealth++;
         }
+    }
+
+    void OnHologramSpawned(object sender, EventArgs args) {
+        if(_runtimeData.playerPos.x < 0) {
+            xHigh = 0;
+        } else {
+            xLow = 0;
+        }
+        GameObject hologram = Instantiate(_hologramPrefab, new Vector3(-_runtimeData.playerPos.x,_runtimeData.playerPos.y,_runtimeData.playerPos.z),Quaternion.identity);
+        hologram.GetComponent<Hologram>().moveSpeed = moveSpeed;
     }
 }
