@@ -22,19 +22,14 @@ public class Boss : MonoBehaviour
         bossBar.SetMaxHealth(healthStages[_runtimeData.currentBossStage]);
     }
 
-    void Update()
-    {
-        
-    }
-
     void healthManager(float damage) {
         currentHealth += damage;
         bossBar.SetHealth(currentHealth);
         if(currentHealth >= healthStages[_runtimeData.currentBossStage]) {
             _runtimeData.currentBossStage++;
             currentHealth = 0;
-            if(_runtimeData.currentBossStage >= healthStages.Length) {
-                // you win
+            if(_runtimeData.currentBossStage >= healthStages.Length-1) {
+                _runtimeData.currentGameState = State.won;
             } else {
                 GameEvents.InvokeStageChanged();
                 StartCoroutine(StageChangeCoroutine());

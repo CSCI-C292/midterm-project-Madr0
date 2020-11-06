@@ -9,5 +9,7 @@ public class Initializer : MonoBehaviour
     void Awake() {
         _runtimeData.tileActive = false;
         _runtimeData.currentBossStage = 0;
+        _runtimeData.hologramActive = false;
+        _runtimeData.currentGameState = State.playing;
     }
 }

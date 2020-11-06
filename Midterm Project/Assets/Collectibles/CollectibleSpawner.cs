@@ -19,7 +19,7 @@ public class CollectibleSpawner : MonoBehaviour
 
     void Update()
     {
-        if(_runtimeData.tileActive == false)
+        if(_runtimeData.tileActive == false && _runtimeData.currentGameState == State.playing)
             timeSinceLastTile += Time.deltaTime;
         if(timeSinceLastTile > spawnRate) {
             SpawnTile();

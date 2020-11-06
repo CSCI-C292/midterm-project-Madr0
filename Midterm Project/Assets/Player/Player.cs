@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class Player : MonoBehaviour
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     public float playerITime = 1f;
     
     public int playerHealth;
+    public Slider healthBar;
 
     private float timeInvincible = 0;
 
@@ -33,28 +35,30 @@ public class Player : MonoBehaviour
         movePoint.parent = null;
         playerHealth = playerHealthCap;
         _runtimeData.playerPos = movePoint.transform.position;
+        healthBar.maxValue = playerHealthCap;
+        healthBar.value = playerHealth;
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-        timeInvincible -= Time.deltaTime;
-        if(Vector3.Distance(transform.position, movePoint.position) <= .05) {
-            if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
-                MoveX(horizontalGridLength);
-            }
-            else if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
-                MoveX(-horizontalGridLength);
-            }
-            else if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
-                MoveY(verticalGridLength);
-            }
-            else if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
-                MoveY(-verticalGridLength);
+        if(_runtimeData.currentGameState == State.playing) {
+            transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+            timeInvincible -= Time.deltaTime;
+            if(Vector3.Distance(transform.position, movePoint.position) <= .05) {
+                if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) {
+                    MoveX(horizontalGridLength);
+                }
+                else if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) {
+                    MoveX(-horizontalGridLength);
+                }
+                else if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
+                    MoveY(verticalGridLength);
+                }
+                else if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) {
+                    MoveY(-verticalGridLength);
+                }
             }
         }
-
-
     }
 
     void MoveX(float dist) {
@@ -72,21 +76,21 @@ public class Player : MonoBehaviour
     }
 
     void OnPlayerDamage(object sender, EventArgs args) {
-        if (timeInvincible <= 0) {
+        if (timeInvincible <= 0 && _runtimeData.currentGameState == State.playing) {
             timeInvincible = playerITime;
             playerHealth--;
-            if(playerHealth <= 0) {
-                // game over
-            }
-        } else {
-            
         }
+        if(playerHealth <= 0) {
+            _runtimeData.currentGameState = State.loss;
+        }
+        healthBar.value = playerHealth;
     }
 
     void OnPlayerHealed(object sender, EventArgs args) {
         if(playerHealth < playerHealthCap) {
             playerHealth++;
         }
+        healthBar.value = playerHealth;
     }
 
     void OnHologramSpawned(object sender, EventArgs args) {

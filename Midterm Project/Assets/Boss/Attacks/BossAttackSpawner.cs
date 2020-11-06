@@ -20,27 +20,70 @@ public class BossAttackSpawner : MonoBehaviour
 
     void Start()
     {
-        GameEvents.SpawnHologram();
         StartCoroutine(AttackWaitCoroutine(5));
     }
 
     void Update()
     {
-        if(!_runtimeData.tileActive && !attackActive) {
-            int rand = Random.Range(0,3);
-            if(rand != previousRand) {
+        if(!_runtimeData.tileActive && !attackActive && _runtimeData.currentGameState == State.playing) {
+            if(_runtimeData.currentBossStage == 0) {
+                int rand = Random.Range(0,2);
                 if(rand == 0) {
-                    StartCoroutine(AttackWaitCoroutine(5));
-                    LightningAttack(2,2,3);
+                    StartCoroutine(AttackWaitCoroutine(6));
+                    RightSawAttack(1.5f,.75f);
                 } else if(rand == 1) {
-                    StartCoroutine(AttackWaitCoroutine(5));
-                    FullSawAttack(2,.7f);
-                } else if(rand == 2) {
-                    StartCoroutine(AttackWaitCoroutine(5));
-                    SpikeAttack(1.5f,1.5f,14);
+                    StartCoroutine(AttackWaitCoroutine(6));
+                    LeftSawAttack(1.5f,.75f);
                 }
+            } else if(_runtimeData.currentBossStage == 1) {
+                int rand = Random.Range(0,3);
+                if(rand != previousRand) {
+                    if(rand == 0) {
+                        StartCoroutine(AttackWaitCoroutine(6));
+                        LightningAttack(2,2,3);
+                    } else if(rand == 1) {
+                        StartCoroutine(AttackWaitCoroutine(6));
+                        FullSawAttack(1.5f,.8f);
+                    } else if(rand == 2) {
+                        StartCoroutine(AttackWaitCoroutine(6));
+                        SpikeAttack(1.5f,1.5f,12);
+                    }
+                }
+                previousRand = rand;
+            } else if(_runtimeData.currentBossStage == 2) {
+                int rand = Random.Range(0,3);
+                if(rand != previousRand) {
+                    if(rand == 0) {
+                        StartCoroutine(AttackWaitCoroutine(5));
+                        LightningAttack(2,2,5);
+                    } else if(rand == 1) {
+                        StartCoroutine(AttackWaitCoroutine(5));
+                        FullSawAttack(2,.7f);
+                    } else if(rand == 2) {
+                        StartCoroutine(AttackWaitCoroutine(5));
+                        SpikeAttack(1.5f,1.5f,14);
+                    }
+                }
+                previousRand = rand;
+            } else if(_runtimeData.currentBossStage == 3) {
+                if(_runtimeData.hologramActive == false) {
+                    GameEvents.SpawnHologram();
+                }
+                int rand = Random.Range(0,3);
+                if(rand != previousRand) {
+                    if(rand == 0) {
+                        StartCoroutine(AttackWaitCoroutine(6));
+                        LightningAttack(2,2,3);
+                    } else if(rand == 1) {
+                        StartCoroutine(AttackWaitCoroutine(6));
+                        FullSawAttack(1.5f,.8f);
+                    } else if(rand == 2) {
+                        StartCoroutine(AttackWaitCoroutine(6));
+                        SpikeAttack(1.5f,1.5f,12);
+                    }
+                }
+                previousRand = rand;
             }
-            previousRand = rand;
         }
     }
 

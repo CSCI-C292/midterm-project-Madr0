@@ -10,6 +10,7 @@ public class Hologram : MonoBehaviour
 
     void Start()
     {
+        _runtimeData.hologramActive = true;
         transform.position = new Vector3(-_runtimeData.playerPos.x,_runtimeData.playerPos.y,_runtimeData.playerPos.z);
     }
 
